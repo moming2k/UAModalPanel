@@ -12,6 +12,11 @@
 
 @synthesize gradientStyle, lineMode;
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+
+    return [self initWithCoder:aDecoder];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame style:(UAGradientBackgroundStyle)aStyle color:(CGFloat *)components lineMode:(UAGradientLineMode)lineModes {
 	if ((self = [super initWithFrame:frame])) {
         // Initialization code
