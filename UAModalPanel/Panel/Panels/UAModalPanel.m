@@ -207,8 +207,8 @@
 - (void)closePressed:(id)sender {
 	
 	// Using Delegates
-	if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
-		if ([delegate shouldCloseModalPanel:self]) {
+	if ([self.delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
+		if ([self.delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
 			[self hide];
 		}
@@ -229,8 +229,8 @@
 - (void)actionPressed:(id)sender {
 	
 	// Using Delegates
-	if ([delegate respondsToSelector:@selector(didSelectActionButton:)]) {
-		[delegate didSelectActionButton:self];
+	if ([self.delegate respondsToSelector:@selector(didSelectActionButton:)]) {
+		[self.delegate didSelectActionButton:self];
 		
 		
 		// Using blocks
@@ -252,8 +252,8 @@
 - (void)showAnimationFinished {};		//subclasses override
 - (void)show {
 	
-	if ([delegate respondsToSelector:@selector(willShowModalPanel:)])
-		[delegate willShowModalPanel:self];
+	if ([self.delegate respondsToSelector:@selector(willShowModalPanel:)])
+		[self.delegate willShowModalPanel:self];
 	
 	[self showAnimationStarting];
 	self.alpha = 0.0;
@@ -285,8 +285,8 @@
 																   }
 																   completion:^(BOOL finished){
 																	   [self showAnimationFinished];
-																	   if ([delegate respondsToSelector:@selector(didShowModalPanel:)])
-																		   [delegate didShowModalPanel:self];
+																	   if ([self.delegate respondsToSelector:@selector(didShowModalPanel:)])
+																		   [self.delegate didShowModalPanel:self];
 																   }];
 											  }];
 						 }];
@@ -303,8 +303,8 @@
 					 }
 					 completion:(shouldBounce ? animationBlock : ^(BOOL finished) {
 						[self showAnimationFinished];
-						if ([delegate respondsToSelector:@selector(didShowModalPanel:)])
-							[delegate didShowModalPanel:self];
+						if ([self.delegate respondsToSelector:@selector(didShowModalPanel:)])
+							[self.delegate didShowModalPanel:self];
 					})];
 
 }
@@ -316,8 +316,8 @@
 
 - (void)hide {	
 	// Hide the view right away
-	if ([delegate respondsToSelector:@selector(willCloseModalPanel:)])
-		[delegate willCloseModalPanel:self];
+	if ([self.delegate respondsToSelector:@selector(willCloseModalPanel:)])
+		[self.delegate willCloseModalPanel:self];
 	
     [UIView animateWithDuration:0.3
 					 animations:^{
@@ -328,8 +328,8 @@
 						 self.contentContainer.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
 					 }
 					 completion:^(BOOL finished){
-						 if ([delegate respondsToSelector:@selector(didCloseModalPanel:)]) {
-							 [delegate didCloseModalPanel:self];
+						 if ([self.delegate respondsToSelector:@selector(didCloseModalPanel:)]) {
+							 [self.delegate didCloseModalPanel:self];
 						 }
 						 [self removeFromSuperview];
 					 }];
